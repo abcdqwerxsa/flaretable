@@ -1,0 +1,82 @@
+{
+  "$schema": "https://unpkg.com/wrangler@latest/config-schema.json",
+  "name": "flaretable",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-03-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "../web/dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": [
+      "/api/*",
+      "/mcp",
+      "/mcp/*",
+      "/openapi.json",
+      "/docs",
+      "/docs/*",
+      "/ws",
+      "/ws/*",
+      "/health"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "CONTROL_DB",
+      "database_name": "flaretable-control",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "BASE_ENGINE",
+        "class_name": "BaseEngineDO"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["BaseEngineDO"]
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "TOKEN_CACHE_KV",
+      "id": "00000000000000000000000000000000"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "ATTACHMENTS_BUCKET",
+      "bucket_name": "flaretable-attachments"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "AUTOMATION_QUEUE",
+        "queue": "flaretable-automation-events"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "flaretable-automation-events",
+        "max_batch_size": 10,
+        "max_batch_timeout": 2,
+        "max_retries": 3,
+        "dead_letter_queue": "flaretable-automation-dlq"
+      }
+    ]
+  },
+  "triggers": {
+    "crons": ["0 3 * * *"]
+  },
+  "vars": {
+    "ENVIRONMENT": "development",
+    "MAX_R2_TOTAL_BYTES": "2147483648",
+    "MAX_ATTACHMENT_BYTES": "26214400"
+  }
+}

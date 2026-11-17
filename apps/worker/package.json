@@ -1,0 +1,28 @@
+{
+  "name": "@flaretable/worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate:local": "wrangler d1 migrations apply flaretable-control --local",
+    "db:migrate:remote": "wrangler d1 migrations apply flaretable-control --remote"
+  },
+  "dependencies": {
+    "@flaretable/shared": "workspace:*",
+    "@hono/zod-openapi": "^0.18.4",
+    "@scalar/hono-api-reference": "^0.8.0",
+    "hono": "^4.7.4",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250310.0",
+    "@types/node": "^26.6.6",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8",
+    "wrangler": "^4.156.2"
+  }
+}

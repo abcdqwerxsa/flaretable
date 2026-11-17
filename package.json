@@ -1,0 +1,19 @@
+{
+  "name": "flaretable",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FlareTable（飞格多维表格）— Cloudflare 原生自动化多维表格与 AI Agents 结构化数据底座",
+  "scripts": {
+    "dev": "pnpm --filter @flaretable/web build && pnpm --filter @flaretable/worker dev",
+    "dev:web": "pnpm --filter @flaretable/web dev",
+    "dev:worker": "pnpm --filter @flaretable/worker dev",
+    "build": "pnpm --filter @flaretable/shared build && pnpm --filter @flaretable/web build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @flaretable/worker test",
+    "deploy": "pnpm build && pnpm --filter @flaretable/worker deploy"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

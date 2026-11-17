@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --ios-bg: #F2F2F7;
+    --ios-blue: #007AFF;
+    --ios-green: #34C759;
+    --ios-red: #FF3B30;
+    --ios-text: #1D1D1F;
+    --ios-secondary: #86868B;
+  }
+
+  body {
+    background-color: #F2F2F7;
+    color: #1D1D1F;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+      "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code,
+  pre,
+  .font-mono {
+    font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+}
+
+/* iPadOS 触控按压回弹 */
+.ios-press {
+  transition: transform 0.14s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.15s ease, opacity 0.15s ease;
+}
+.ios-press:active {
+  transform: scale(0.97);
+}
+
+/* iPadOS 浮动面板毛玻璃高光边界 */
+.ios-floating-panel {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.045), 0 0 0 0.5px rgba(0, 0, 0, 0.07);
+}
+
+.ios-popover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+}
+
+/* 细粒度 Apple 风格半透明滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(60, 60, 67, 0.18);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(60, 60, 67, 0.32);
+}
